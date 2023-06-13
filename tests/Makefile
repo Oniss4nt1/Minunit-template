@@ -8,7 +8,9 @@ RESET 			= \033[0m
 
 
 ############################# Project files ################################
-SRC 			= ../src/ft_printf.c
+SRC 			= ../src/ft_printf.c ../src/print_base.c ../src/print_char.c ../src/print_int.c \
+				../src/print_percent.c ../src/print_pointer.c ../src/print_string.c ../src/print_unsign_int.c
+
 HEADER_PROJECT 	= ../src/ft_printf.h
 
 ############################# Test files ###################################
@@ -18,8 +20,11 @@ HEADER_MINUNIT 	= ../minunit.h
 
 ############################## Compiler ####################################
 
-test:		$(OBJS)
-			@cc $(SRC) $(TESTS) -o $(PROGRAM_TEST) && ./$(PROGRAM_TEST)
+$(PROGRAM_TEST): $(OBJS)
+			@cc $(SRC) $(TESTS) -o $(PROGRAM_TEST)
+
+test:		$(PROGRAM_TEST)
+			@./$(PROGRAM_TEST)
 
 leak:	test
 			@valgrind --track-origins=yes --error-exitcode=42 --leak-check=full ./${PROGRAM_TEST}
