@@ -1,13 +1,13 @@
 #include "minunit.h"
 #include <stdio.h>
-#include "../src/ft_printf.h"
+#include "../src/example.h"
 
 MU_TEST(test_pointer_value_is_negative)
 {
 	int valor_do_ponteiro = -42;
-	int comprimento_do_ponteiro = ft_printf("%p", &valor_do_ponteiro);
-	int comprimento_do_printf = printf("%p", &valor_do_ponteiro);
-	mu_assert_int_eq(comprimento_do_ponteiro, comprimento_do_printf);
+	int result = ft_printf("%p", &valor_do_ponteiro);
+	int expected = printf("%p", &valor_do_ponteiro);
+	mu_assert_int_eq(result, expected);
 }
 
 MU_TEST_SUITE(test_suite)

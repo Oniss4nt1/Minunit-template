@@ -8,31 +8,40 @@ RESET 			= \033[0m
 
 
 ############################# Project files ################################
-SRC 			= ../src/ft_printf.c ../src/print_base.c ../src/print_char.c ../src/print_int.c \
-				../src/print_percent.c ../src/print_pointer.c ../src/print_string.c ../src/print_unsign_int.c
+SRC 			= 		------------------------------------------------------> #Put here the source files
 
-HEADER_PROJECT 	= ../src/ft_printf.h
+HEADER_PROJECT 	= ../src/example.h -------------------------------------------> #Change this to your header file
 
 ############################# Test files ###################################
-TESTS 			= test_pointer.c
-PROGRAM_TEST 	= test_pointer
+TESTS 			= 		------------------------------------------------------> #Put here the test files
+PROGRAM_TEST 	= $(patsubst %.c, %, $(TESTS))
 HEADER_MINUNIT 	= ../minunit.h
 
 ############################## Compiler ####################################
 
-$(PROGRAM_TEST): $(OBJS)
-			@cc $(SRC) $(TESTS) -o $(PROGRAM_TEST)
-
-test:		$(PROGRAM_TEST)
+$(TEST):	$(SRC) $(TEST).c
+			@cc $(SRC) $(TEST).c -o $(TEST)
 			@./$(PROGRAM_TEST)
+			@echo "$(YELLOW) Testing $(TEST)done!$(RESET)"
+			@rm -f $(TEST)
+			@echo "$(YELLOW)Cleaning done!$(RESET)"
+
+
+$(PROGRAM_TEST): $(OBJS)
+			@cc $(SRC) $@.c -o $@
+
 
 leak:	test
 			@valgrind --track-origins=yes --error-exitcode=42 --leak-check=full ./${PROGRAM_TEST}
 
 clean:		
-			@rm -f ${OBJS} ${PROGRAM_TEST}
+			@rm -f ${PROGRAM_TEST} 
 			@echo "$(YELLOW)Cleaning done!$(RESET)"
 
 fclean:		clean
 
 re:			fclean
+
+.PHONY: 	
+
+
