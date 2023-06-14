@@ -8,7 +8,7 @@ RESET 			= \033[0m
 
 
 ############################# Project files ################################
-SRC 			= 		------------------------------------------------------> #Put here the source files
+SRC 			= ../src/		----------------------------------------------> #Put here the source files
 
 HEADER_PROJECT 	= ../src/example.h -------------------------------------------> #Change this to your header file
 
